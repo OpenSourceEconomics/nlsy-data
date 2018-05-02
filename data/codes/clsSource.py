@@ -17,7 +17,11 @@ TIME_CONSTANT = []
 TIME_CONSTANT += ['IDENTIFIER', 'RACE', 'GENDER']
 TIME_CONSTANT += ['ASVAB_ARITHMETIC_REASONING', 'ASVAB_WORD_KNOWLEDGE', 'ASVAB_ALTERED_TESTING']
 TIME_CONSTANT += ['ASVAB_PARAGRAPH_COMPREHENSION', 'ASVAB_NUMERICAL_OPERATIONS']
-TIME_CONSTANT += ['AFQT_1', 'SAMPLE_ID']
+TIME_CONSTANT += ['AFQT_1', 'SAMPLE_ID', 'ROTTER_SCORE', 'ROTTER_1', 'ROTTER_2']
+TIME_CONSTANT += ['ROTTER_3', 'ROTTER_4', 'ROSENBERG_SCORE', 'ROSENBERG_1', 'ROSENBERG_2']
+TIME_CONSTANT += ['ROSENBERG_3', 'ROSENBERG_4', 'ROSENBERG_5', 'ROSENBERG_6', 'ROSENBERG_7']
+TIME_CONSTANT += ['ROSENBERG_8', 'ROSENBERG_9', 'ROSENBERG_10']
+TIME_CONSTANT += ['HIGHEST_GRADE_COMPLETED_FATHER', 'HIGHEST_GRADE_COMPLETED_MOTHER']
 
 TIME_VARYING = []
 TIME_VARYING += ['ENROLLMENT_STATUS', 'YEAR_OF_BIRTH', 'CPSOCC70']
@@ -68,7 +72,7 @@ class SourceCls(object):
         """ Read the original file from the NLSY INVESTIGATOR.
         """
         # Read from original data from CSV file
-        self.source_wide = pd.read_csv('sources/original.csv', nrows=num_agents)
+        self.source_wide = pd.read_csv('input/original.csv', nrows=num_agents)
 
         # Process variable dictionary
         survey_years, dct = get_mappings()

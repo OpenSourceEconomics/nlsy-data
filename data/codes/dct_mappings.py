@@ -52,6 +52,30 @@ def process_time_constant(years):
     for year in years:
         dct_constant['GENDER'][year] = get_name(substrings)
 
+    dct_constant['ROTTER_SCORE'] = dict()
+    substrings = 'ROTTER SCALE SCORE'
+    for year in years:
+        dct_constant['ROTTER_SCORE'][year] = get_name(substrings)
+
+    for i in range(1, 5):
+        label = 'ROTTER_' + str(i)
+        substrings = 'ROTTER-' + str(i) + 'A'
+        dct_constant[label] = dict()
+        for year in years:
+            dct_constant[label][year] = get_name(substrings)
+
+    dct_constant['ROSENBERG_SCORE'] = dict()
+    substrings = 'SELF-ESTEEM SCORE'
+    for year in years:
+        dct_constant['ROSENBERG_SCORE'][year] = get_name(substrings)
+
+    for i in range(1, 11):
+        label = 'ROSENBERG_' + str(i)
+        substrings = 'R030' + str(i + 34) + '.00'
+        dct_constant[label] = dict()
+        for year in years:
+            dct_constant[label][year] = get_name(substrings)
+
     dct_constant['ASVAB_ARITHMETIC_REASONING'] = dict()
     substrings = 'PROFILES, ASVAB VOCATIONAL TEST - SECTION 2-ARITHMETIC REASONING'
     for year in years:
@@ -82,6 +106,16 @@ def process_time_constant(years):
     for year in years:
         dct_constant['AFQT_1'][year] = get_name(substrings)
 
+    dct_constant['HIGHEST_GRADE_COMPLETED_FATHER'] = dict()
+    substrings = 'HGC-FATHER'
+    for year in years:
+        dct_constant['HIGHEST_GRADE_COMPLETED_FATHER'][year] = get_name(substrings)
+
+    dct_constant['HIGHEST_GRADE_COMPLETED_MOTHER'] = dict()
+    substrings = 'HGC-MOTHER'
+    for year in years:
+        dct_constant['HIGHEST_GRADE_COMPLETED_MOTHER'][year] = get_name(substrings)
+
     return dct_constant
 
 
@@ -92,7 +126,7 @@ def process_multiple_each_year():
 
     # The mapping between the continuous weeks counter and the calendar year is provided on the
     # NLSY website.
-    mapping_continuous_week = pd.read_pickle('sources/continuous_week_crosswalk_2012.pkl')
+    mapping_continuous_week = pd.read_pickle('input/continuous_week_crosswalk_2012.pkl')
     years = mapping_continuous_week['Week Start: \nYear'].unique()
 
     # Prepare container
@@ -153,7 +187,7 @@ def process_single_each_year():
 
     ''' HIGHEST GRADE COMPLETED
     '''
-    substrings = 'HIGHEST GRADE COMPLETED'
+    substrings = 'HIGHEST GRADE COMPLETED AS'
     dct['HIGHEST_GRADE_COMPLETED'] = get_year_name(substrings)
 
     ''' YEAR OF BIRTH
@@ -209,7 +243,7 @@ def get_name(substrings):
     if type(substrings) == str:
         substrings = [substrings]
 
-    with open('sources/original.sdf', 'r') as infile:
+    with open('input/original.sdf', 'r') as infile:
         for line in infile.readlines():
             is_relevant = [substring in line for substring in substrings]
             is_relevant = np.all(is_relevant)
@@ -233,7 +267,7 @@ def get_year_name(substrings):
         substrings = [substrings]
 
     container = dict()
-    with open('sources/original.sdf', 'r') as infile:
+    with open('input/original.sdf', 'r') as infile:
         for line in infile.readlines():
             is_relevant = [substring in line for substring in substrings]
             is_relevant = np.all(is_relevant)
@@ -254,7 +288,7 @@ def process_highest_degree_received():
         """ This method reads in the variable names for the highest grade received.
         """
         rslt = dict()
-        with open('sources/original.sdf', 'r') as infile:
+        with open('input/original.sdf', 'r') as infile:
             for line in infile.readlines():
                 is_relevant = 'HIGHEST DEGREE EVER RECEIVED' in line
 
@@ -295,7 +329,7 @@ def process_school_enrollment_monthly():
         """ Search for the information in the short description file.
         """
         rslt = dict()
-        with open('sources/original.sdf', 'r') as infile:
+        with open('input/original.sdf', 'r') as infile:
             for line in infile.readlines():
                 is_relevant = 'MONTHS ENROLLED IN SCHOOL SINCE LAST INT' in line
                 is_relevant = np.all(is_relevant)

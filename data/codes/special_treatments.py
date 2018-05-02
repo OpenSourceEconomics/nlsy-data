@@ -158,7 +158,7 @@ def calculate_afqt_scores(df):
     df.loc[cond, 'AFQT_RAW'] = np.nan
 
     # We have a little unit test, where we reconstruct the AFQT_1 variable from the inputs.
-    assert_equal(_test_afqt(df), True)
+    assert_equal(_ftest_afqt(df), True)
 
     return df
 
