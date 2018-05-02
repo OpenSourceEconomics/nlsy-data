@@ -1,0 +1,7 @@
+name: nlsy_dataset
+dependencies:
+  - python=3.6
+  - matplotlib
+  - numpy
+  - scipy
+  - statsmodels
