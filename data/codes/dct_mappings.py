@@ -228,8 +228,7 @@ def get_name(substrings):
 
 
 def get_year_name(substrings):
-    """ Search through the file by substrings.
-    """
+    """ Search through the file by substrings."""
     # We allow to pass in a string or a list of strings that are checked in the variable
     # descriptions.
     if type(substrings) == str:
