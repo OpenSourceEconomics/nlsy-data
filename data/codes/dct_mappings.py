@@ -29,9 +29,7 @@ def get_mappings():
 
 
 def process_time_constant(years):
-    """ We need to process some time-constant variables.
-    """
-
+    """ We need to process some time-constant variables."""
     dct_constant = dict()
 
     dct_constant['RACE'] = dict()

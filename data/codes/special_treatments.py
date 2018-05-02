@@ -67,10 +67,14 @@ def aggregate_school_enrollment_monthly(df):
 
 
 def create_is_interviewed(df):
-    """ This function creates an indicator that evaluates to TRUE if an individual was
-    interviewed that year based on the information about the reasons for non-interviews.
+    """This function creates an indicator that evaluates to TRUE if an individual was interviewed
+    that year based on the information about the reasons for non-interviews.
     """
     df['IS_INTERVIEWED'] = df['REASON_NONINTERVIEW'].fillna(0) == 0
+
+    # TODO: This needs to be handled more flexibly.
+    for year in [1995, 1997, 1999, 2001, 2003, 2005, 2007, 2009, 2011]:
+        df['IS_INTERVIEWED'].loc[:, year] = False
 
     return df
 
