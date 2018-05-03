@@ -116,6 +116,9 @@ def process_time_constant(years):
     for year in years:
         dct_constant['HIGHEST_GRADE_COMPLETED_MOTHER'][year] = get_name(substrings)
 
+    # TODO: We need to reconstruct the Rosenberg and Rotter scores based on the individual items
+    # as a test for the dataset.
+
     return dct_constant
 
 

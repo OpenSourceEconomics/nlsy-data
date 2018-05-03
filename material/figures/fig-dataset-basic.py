@@ -34,14 +34,10 @@ plt.savefig('fig-dataset-basic-observations.png')
 # We want to plot gender.
 dat = df['GENDER'].loc[:, 1978].astype('category')
 dat = dat.cat.rename_categories({1: 'Male', 2: 'Female'})
-dat = dat.value_counts().to_dict()
 
 fig, ax = plt.subplots()
-ax.set_ylabel('Observations')
-ax.set_xlabel('Gender')
+ax.pie(dat.value_counts(normalize=True), labels=['Male', 'Female'], autopct='%1.1f%%')
 
-set_formatter(ax)
-ax.bar(dat.keys(), dat.values())
 plt.savefig('fig-dataset-basic-gender.png')
 
 # We want to plot ethnic origin.
@@ -56,14 +52,8 @@ df['RACE_NEW'].loc[cond] = 'Hispanic'
 
 
 dat = df['RACE_NEW'].loc[:, 1978].astype('category')
-dat = dat.value_counts().to_dict()
-
 fig, ax = plt.subplots()
-ax.set_ylabel('Observations')
-ax.set_xlabel('Race')
-
-set_formatter(ax)
-ax.bar(dat.keys(), dat.values())
+ax.pie(dat.value_counts(normalize=True), labels=['White', 'Black', 'Hispanic'], autopct='%1.1f%%')
 plt.savefig('fig-dataset-basic-race.png')
 
 # We want to plot the years of birth. For pretty formatting, we remove years of birth with only a
