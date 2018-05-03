@@ -29,7 +29,7 @@ ax.bar(df['SURVEY_YEAR'].unique(), num_obs)
 ax.set_ylabel('Observations')
 ax.set_xlabel('Year')
 
-plt.savefig('fig-basics-observations.png')
+plt.savefig('fig-dataset-basic-observations.png')
 
 # We want to plot gender.
 dat = df['GENDER'].loc[:, 1978].astype('category')
@@ -42,11 +42,20 @@ ax.set_xlabel('Gender')
 
 set_formatter(ax)
 ax.bar(dat.keys(), dat.values())
-plt.savefig('fig-basics-gender.png')
+plt.savefig('fig-dataset-basic-gender.png')
 
 # We want to plot ethnic origin.
-dat = df['RACE'].loc[:, 1978].astype('category')
-dat = dat.cat.rename_categories({1: 'Hispanic', 2: 'Black', 3: 'Other'})
+import numpy as np
+df['RACE_NEW'] = np.nan
+cond = df['SAMPLE_ID'].isin([1, 2, 5, 6, 9, 12, 15, 18])
+df['RACE_NEW'].loc[cond] = 'White'
+cond = df['SAMPLE_ID'].isin([3, 7, 10, 13, 16, 19])
+df['RACE_NEW'].loc[cond] = 'Black'
+cond = df['SAMPLE_ID'].isin([4, 811, 14, 17, 20])
+df['RACE_NEW'].loc[cond] = 'Hispanic'
+
+
+dat = df['RACE_NEW'].loc[:, 1978].astype('category')
 dat = dat.value_counts().to_dict()
 
 fig, ax = plt.subplots()
@@ -55,7 +64,7 @@ ax.set_xlabel('Race')
 
 set_formatter(ax)
 ax.bar(dat.keys(), dat.values())
-plt.savefig('fig-basics-race.png')
+plt.savefig('fig-dataset-basic-race.png')
 
 # We want to plot the years of birth. For pretty formatting, we remove years of birth with only a
 # very small number of individuals.
@@ -70,4 +79,4 @@ ax.set_ylabel('Observations')
 ax.set_xlabel('Year of Birth')
 set_formatter(ax)
 ax.bar(dat.keys(), dat.values())
-plt.savefig('fig-basics-birth.png')
+plt.savefig('fig-dataset-basic-birth.png')
