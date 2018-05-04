@@ -27,12 +27,12 @@ def get_dataset():
     OBS_DATASET['RACE_NEW'] = np.nan
 
     cond = OBS_DATASET['SAMPLE_ID'].isin([1, 2, 5, 6, 9, 12, 15, 18])
-    OBS_DATASET['RACE_NEW'].loc[cond] = 'white'
+    OBS_DATASET.loc[cond, 'RACE_NEW'] = 'white'
 
     cond = OBS_DATASET['SAMPLE_ID'].isin([3, 7, 10, 13, 16, 19])
-    OBS_DATASET['RACE_NEW'].loc[cond] = 'black'
+    OBS_DATASET.loc[cond, 'RACE_NEW'] = 'black'
 
     cond = OBS_DATASET['SAMPLE_ID'].isin([4, 811, 14, 17, 20])
-    OBS_DATASET['RACE_NEW'].loc[cond] = 'hispanic'
+    OBS_DATASET.loc[cond, 'RACE_NEW'] = 'hispanic'
 
     return OBS_DATASET

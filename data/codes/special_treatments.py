@@ -74,7 +74,7 @@ def create_is_interviewed(df):
 
     # TODO: This needs to be handled more flexibly.
     for year in [1995, 1997, 1999, 2001, 2003, 2005, 2007, 2009, 2011]:
-        df['IS_INTERVIEWED'].loc[:, year] = False
+        df.loc[(slice(None), year), 'IS_INTERVIEWED'] = False
 
     return df
 
