@@ -31,7 +31,6 @@ for score in ['ROTTER', 'ROSENBERG']:
 
 
     ax.yaxis.get_major_ticks()[0].set_visible(False)
-    #plt.xlim([0, 40])
     plt.legend()
 
     label = score.lower().capitalize() + ' Scores'

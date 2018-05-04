@@ -1,8 +1,19 @@
 """This module contains some auxiliary functions shared across the figures."""
+import subprocess
+import os
+
 import pandas as pd
 import numpy as np
 
-OBS_DATASET = pd.read_pickle('../../data/output/original.pkl')
+# We might need to create the dataset if it does not exist in the first place.
+fname = '../../data/output/original.pkl'
+if not os.path.exists(fname):
+    cwd = os.getcwd()
+    os.chdir('../../data/')
+    subprocess.check_call('./create_data')
+    os.chdir(cwd)
+
+OBS_DATASET = pd.read_pickle(fname)
 SURVEY_YEARS = OBS_DATASET['SURVEY_YEAR'].unique()
 
 

@@ -292,7 +292,7 @@ class SourceCls(object):
         np.testing.assert_equal(set(source_long.columns.values), set(varnames))
 
         # This ensures that there are now surprising changes to the dataset
-        val = 8692309468.5
+        val = 8726642399.5
         np.testing.assert_equal(source_long.sum(numeric_only=True).sum(), val)
 
     def store(self, fname):

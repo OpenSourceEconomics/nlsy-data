@@ -1,10 +1,11 @@
 """This module creates figures that illustrate some basic relationships between labor market
 success and measures of human capital."""
-from auxiliary import get_dataset
-
-import pandas as pd
-import seaborn.apionly as sns
 import matplotlib.pyplot as plt
+import seaborn.apionly as sns
+import pandas as pd
+import numpy as np
+
+from auxiliary import get_dataset
 
 df = get_dataset()
 
@@ -28,7 +29,9 @@ for parent in ['AFQT', 'ROSENBERG', 'ROTTER']:
     y = pd.qcut(dat, 4, labels=False, duplicates="drop")
 
     hm = sns.heatmap(pd.crosstab(y, x, normalize=True), cmap="Blues", vmin=0, vmax=0.15, annot=True)
-    plt.yticks(rotation=0)
+    plt.yticks(np.linspace(0.5, 3.5, 4), range(1, 5), rotation=0)
+    plt.xticks(np.linspace(0.5, 3.5, 4), range(1, 5), rotation=0)
+
     plt.ylabel('Hourly Wages (quartiles)')
 
     plt.xlabel(ylabel + ' Scores (quartiles)')

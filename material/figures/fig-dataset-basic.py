@@ -1,6 +1,6 @@
 """This module creates some auxiliary graphs for the discussion of the dataset."""
-from matplotlib.ticker import MaxNLocator
 import matplotlib.pyplot as plt
+import numpy as np
 import matplotlib
 
 from auxiliary import SURVEY_YEARS
@@ -41,7 +41,6 @@ ax.pie(dat.value_counts(normalize=True), labels=['Male', 'Female'], autopct='%1.
 plt.savefig('fig-dataset-basic-gender.png')
 
 # We want to plot ethnic origin.
-import numpy as np
 df['RACE_NEW'] = np.nan
 cond = df['SAMPLE_ID'].isin([1, 2, 5, 6, 9, 12, 15, 18])
 df['RACE_NEW'].loc[cond] = 'White'
@@ -49,7 +48,6 @@ cond = df['SAMPLE_ID'].isin([3, 7, 10, 13, 16, 19])
 df['RACE_NEW'].loc[cond] = 'Black'
 cond = df['SAMPLE_ID'].isin([4, 811, 14, 17, 20])
 df['RACE_NEW'].loc[cond] = 'Hispanic'
-
 
 dat = df['RACE_NEW'].loc[:, 1978].astype('category')
 fig, ax = plt.subplots()
