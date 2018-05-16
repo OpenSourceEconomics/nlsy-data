@@ -76,3 +76,22 @@ ax.set_xlabel('Year of Birth')
 ax.bar(dat.keys(), dat.values())
 
 plt.savefig('fig-dataset-basic-birth.png')
+
+# We want to plot the relative shares of the different samples.
+df['SAMPLE'] = df['SAMPLE_ID'].loc[:, 1978].copy()
+cond = df['SAMPLE_ID'].isin(range(9))
+df.loc[cond, 'SAMPLE'] = 'Cross-sectional sample'
+
+cond = df['SAMPLE_ID'].isin(range(9, 15))
+df.loc[cond, 'SAMPLE'] = 'Supplementary sample'
+
+cond = df['SAMPLE_ID'].isin(range(15, 21))
+df.loc[cond, 'SAMPLE'] = 'Military sample'
+
+ax = plt.figure().add_subplot(111)
+
+dat = df['SAMPLE'].loc[:, 1978].astype('category')
+
+labels = ['Cross-sectional', 'Supplementary', 'Military']
+ax.pie(dat.value_counts(normalize=True), labels=labels, autopct='%1.1f%%')
+plt.savefig('fig-dataset-basic-samples.png')
