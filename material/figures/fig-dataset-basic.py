@@ -6,6 +6,7 @@ import matplotlib
 
 from auxiliary import SURVEY_YEARS
 from auxiliary import get_dataset
+from auxiliary import get_other_dataset
 
 
 def set_formatter(ax):
@@ -15,6 +16,7 @@ def set_formatter(ax):
 
 
 df = get_dataset()
+df79 = get_other_dataset()
 
 # We want to plot the number of observations over time.
 num_obs = []
@@ -41,6 +43,7 @@ ax.pie(dat.value_counts(normalize=True), labels=['Male', 'Female'], autopct='%1.
 
 plt.savefig('fig-dataset-basic-gender.png')
 
+'''
 # We want to plot ethnic origin.
 df['RACE_NEW'] = np.nan
 cond = df['SAMPLE_ID'].isin([1, 2, 5, 6, 9, 12, 15, 18])
@@ -58,6 +61,31 @@ ax = plt.figure().add_subplot(111)
 dat = df['RACE_NEW'].loc[:, 1978].astype('category')
 ax.pie(dat.value_counts(normalize=True), labels=['White', 'Black', 'Hispanic'], autopct='%1.1f%%')
 plt.savefig('fig-dataset-basic-race.png')
+'''
+
+# We want to plot income quartiles.
+first_q = np.percentile(df79['TNFI_TRUNC'], 25)
+second_q = np.percentile(df79['TNFI_TRUNC'], 50)
+third_q = np.percentile(df79['TNFI_TRUNC'], 75)
+
+
+q1 = df79.loc[lambda df: df.TNFI_TRUNC < first_q, :]
+total_q_1 = q1['TNFI_TRUNC'].sum()
+
+q2 = df79.loc[lambda df: df.TNFI_TRUNC < second_q, :]
+total_q_2 = q2['TNFI_TRUNC'].sum() - total_q_1
+
+q3 = df79.loc[lambda df: df.TNFI_TRUNC < third_q, :]
+total_q_3 = q3['TNFI_TRUNC'].sum() - total_q_2
+
+total_q_4 = df79['TNFI_TRUNC'].sum() - total_q_3
+
+dat = [total_q_1, total_q_2, total_q_3, total_q_4]
+ax = plt.figure().add_subplot(111)
+ax.pie(dat, labels=['First quartile', 'Second quartile', 'Third quartile',
+                    'Fourth quartile'], autopct='%1.1f%%')
+
+plt.savefig('fig-dataset-basic-income-quartile.png')
 
 # We want to plot the years of birth. For pretty formatting, we remove years of birth with only a
 # very small number of individuals.
