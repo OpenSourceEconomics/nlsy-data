@@ -16,6 +16,6 @@ install:
 
 script:
   - texhash
-  - travis_wait python scripst/create_data.py
-  - travis_wait python scripst/create_material.py
-  - travis_wait python scripst/create_slides.py
+  - travis_wait python scripts/create_data.py
+  - travis_wait python scripts/create_material.py
+  - travis_wait python scripts/create_slides.py
