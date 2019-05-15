@@ -9,11 +9,10 @@ install:
   - sudo apt-get update
   - sudo apt-get install texlive texlive-science texlive-latex-extra texlive-bibtex-extra texlive-fonts-extra
   - sudo apt-get install pdftk
-  - pip install matplotlib
-  - pip install numpy
-  - pip install scipy
-  - pip install statsmodels
-  - pip install seaborn
+  - ./scripts/travis_miniconda.sh
+  - PATH="$HOME/miniconda/bin:$PATH"
+  - conda env create -f environment.yml
+  - source activate nlsy_dataset
 script:
   - texhash
   - travis_wait python scripts/create_data.py
