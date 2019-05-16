@@ -30,6 +30,7 @@ for score in ['ROTTER', 'ROSENBERG']:
         sns.distplot(dat, label=group.capitalize())
 
     ax.set_xlabel(score.lower().capitalize() + ' Scores')
+    plt.gca().invert_xaxis()
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.legend()
 
