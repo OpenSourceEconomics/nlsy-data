@@ -27,9 +27,10 @@ for parent in ['AFQT', 'ROSENBERG', 'ROTTER']:
     y = pd.qcut(df['WAGE_HOURLY_JOB_1'], 4, labels=False, duplicates="drop")
 
     tab = pd.crosstab(y, x, normalize=True)
+    tab = round(tab,2)
     hm = sns.heatmap(tab, cmap="Blues", vmin=0, vmax=0.15, annot=True)
     hm.invert_yaxis()
-
+    print(tab)
     ax.set_yticks(np.linspace(0.5, 3.5, 4))
     ax.set_yticklabels(range(1, 5))
     ax.set_ylabel('Hourly Wages (quartiles)')
