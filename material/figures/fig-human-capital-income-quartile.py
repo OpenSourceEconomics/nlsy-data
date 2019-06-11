@@ -3,14 +3,14 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from auxiliary import get_other_dataset
+from auxiliary import get_dataset
 
-df = get_other_dataset()
+df = get_dataset()
 
 ax = plt.figure().add_subplot(111)
 for group in ['first quartile', 'second quartile', 'third quartile', 'fourth quartile']:
     cond = df['FAMILY_INCOME_QUARTILE'] == group
-    dat = df.loc[(slice(None), 1978), 'AFQT_RAW'].loc[cond].dropna()
+    dat = df.loc[df['SURVEY_YEAR'] == 1978, ['AFQT_RAW']].loc[cond].dropna()
     sns.distplot(dat, label=group.capitalize())
 
 ax.yaxis.get_major_ticks()[0].set_visible(False)
@@ -26,11 +26,13 @@ for score in ['ROTTER', 'ROSENBERG']:
     ax = plt.figure().add_subplot(111)
     for group in ['first quartile', 'second quartile', 'third quartile', 'fourth quartile']:
         label = score + '_SCORE'
-        dat = df[df['FAMILY_INCOME_QUARTILE'] == group].loc[(slice(None), 1978), label].dropna()
+        cond = df['FAMILY_INCOME_QUARTILE'] == group
+        dat = df[cond].loc[df['SURVEY_YEAR'] == 1978, [label]].dropna()
         sns.distplot(dat, label=group.capitalize())
 
     ax.set_xlabel(score.lower().capitalize() + ' Scores')
-    plt.gca().invert_xaxis()
+    if score == 'ROTTER':
+        plt.gca().invert_xaxis()
     ax.yaxis.get_major_ticks()[0].set_visible(False)
     ax.legend()
 
