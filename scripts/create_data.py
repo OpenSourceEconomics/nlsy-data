@@ -3,7 +3,7 @@
 the wide format.
 """
 
-from clsSource import SourceCls
+from codes.clsSource import SourceCls
 
 if __name__ == '__main__':
 
