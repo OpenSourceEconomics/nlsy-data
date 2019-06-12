@@ -15,6 +15,6 @@ install:
   - source activate nlsy_dataset
 script:
   - texhash
-  - travis_wait python ./data/create_data.py
-  - travis_wait python ./material/create_material.py
-  - travis_wait python ./presentation/scripts/create_slides.py
+  - travis_wait python ./data/create_data
+  - travis_wait python ./material/create_material
+  - travis_wait python ./presentation/scripts/create_slides
