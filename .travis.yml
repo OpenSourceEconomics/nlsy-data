@@ -13,6 +13,10 @@ install:
   - PATH="$HOME/miniconda/bin:$PATH"
   - conda env create -f environment.yml
   - source activate nlsy_dataset
+
+before_script:
+  - export PYTHONPATH=$PYTHONPATH:$(pwd)/data/codes/
+
 script:
   - texhash
   - cd data
