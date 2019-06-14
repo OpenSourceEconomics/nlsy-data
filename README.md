@@ -12,4 +12,4 @@ We maintain a cleaned version of the [National Longitudinal Survey of Youth 1979
 
 * **material** allows to create the graphs for the presentation.
 
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
+[![Build Status](https://travis-ci.org/HumanCapitalAnalysis/microeconometrics.svg?branch=master)](https://travis-ci.org/OpenSourceEconomics/nlsy_dataset)[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
