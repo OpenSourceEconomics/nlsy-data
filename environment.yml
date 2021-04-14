@@ -1,4 +1,4 @@
-name: nlsy_dataset
+name: course-nlsy-dataset
 dependencies:
   - python=3.6
   - matplotlib
